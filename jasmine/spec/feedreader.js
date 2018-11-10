@@ -65,40 +65,34 @@ $(function () {
     });
 
     describe("Initial Entires", () => {
-
         beforeEach((done) => {
-            loadFeed(0, () => {
-                done();
-            });
-        })
+            loadFeed(0,done);
+        });
 
-        it("has atleast one entry", (done) => {
+        it("has atleast one entry", () => {
             const feedEntries = document.querySelectorAll(".feed .entry");
             expect(feedEntries).toBeDefined();
             expect(feedEntries.length).toBeGreaterThan(0);
-            done();
 
         });
 
     });
 
     describe("New Feed Selection", () => {
-        let oldHeader, newHeader;
+        let oldFeed, newFeed;
 
         beforeEach((done) => {
             loadFeed(0, () => {
-                oldHeader = document.querySelector(".header-title").textContent;
+                oldFeed = document.querySelector("div.feed").innerHTML;
                 loadFeed(1, () => {
-                    newHeader = document.querySelector(".header-title").textContent;
+                    newFeed = document.querySelector("div.feed").innerHTML;
                     done();
-
                 });
             });
         });
 
-        it("loads another feed", (done) => {
-            expect(newHeader).not.toBe(oldHeader);
-            done();
+        it("loads another feed", () => {
+            expect(newFeed).not.toBe(oldFeed);
 
         });
 
